@@ -52,13 +52,22 @@ export class GameComponent implements OnInit {
 
   async newGame() {
     this.game = new Game();
-    console.log(this.game);
+    console.log('game from cache', this.game);
     this.route.params.subscribe((params) => {
       this.gameID = params['id'];
           const gameCollection = collection(this.firestore, 'games');
           const documentReference = doc(gameCollection, params['id']);
           docData(documentReference).subscribe((game) => {
-            console.log('game', game);
+            console.log('game from db', game);
+                // this.game.player_images = game['player_images'];
+                this.game.players = game['players'];
+                this.game.stack = game['stack'];
+                this.game.playedCards = game['playedCards'];
+                this.game.currentPlayer = game['currentPlayer'];
+                this.currentCard = game['currentCard'];
+                // ggf. currentCard nach game auslagern - ist im github auch so
+                // this.game.pickCardAnimation = game['pickCardAnimation'];
+                // this.game.gameOver = game['gameOver'];
             
           })
     });
