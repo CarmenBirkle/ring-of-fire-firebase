@@ -11,8 +11,10 @@ import {
   setDoc,
   doc,
   addDoc,
+  docData,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-game',
@@ -24,32 +26,46 @@ export class GameComponent implements OnInit {
   pickCardAnimation = false;
   currentCard: string = '';
   private firestore: Firestore = inject(Firestore);
-  game$: Observable<any[]>;
+  // game$: Observable<any[]>;
+  gameID: string = '';
   
  
 
-  constructor(public dialog: MatDialog) {
-    const gameCollection = collection(this.firestore, 'games');
-    this.game$ = collectionData(gameCollection);
+  constructor(private route: ActivatedRoute, public dialog: MatDialog) {
+    // const gameCollection = collection(this.firestore, 'games');
+    // this.game$ = collectionData(gameCollection);
 
-    this.game$.subscribe((newGame) => {
-       console.log('neues Spiel', newGame);
-      });
+    // this.game$.subscribe((newGame) => {
+    //    console.log('neues Spiel', newGame);
+    //   });
   }
   
 
 
   ngOnInit(): void {
     this.newGame();
-    }
+    // this.route.params.subscribe((params) => {
+    //  console.log(params['id'])
+    // });
+  }
   
 
   async newGame() {
     this.game = new Game();
     console.log(this.game);
-     const gameCollection = collection(this.firestore, 'games');
-     let gameInfo = await addDoc(gameCollection, this.game.toJson());
-     console.log(gameInfo);
+    this.route.params.subscribe((params) => {
+      this.gameID = params['id'];
+          const gameCollection = collection(this.firestore, 'games');
+          const documentReference = doc(gameCollection, params['id']);
+          docData(documentReference).subscribe((game) => {
+            console.log('game', game);
+            
+          })
+    });
+ 
+    //  const gameCollection = collection(this.firestore, 'games');
+    //  let gameInfo = await addDoc(gameCollection, this.game.toJson());
+    //  console.log(gameInfo);
   }
 
   // TODO  ggf. bei take Card abfangen wenn keine Karten mehr da sind:
