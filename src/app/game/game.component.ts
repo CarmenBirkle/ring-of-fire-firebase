@@ -1,10 +1,17 @@
 
 //@ts-check
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , inject} from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
-
+import {
+  Firestore,
+  collection,
+  collectionData,
+  setDoc,
+  doc,
+} from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-game',
@@ -15,12 +22,32 @@ export class GameComponent implements OnInit {
   game: Game = new Game();
   pickCardAnimation = false;
   currentCard: string = '';
+  private firestore: Firestore = inject(Firestore);
+  game$: Observable<any[]>;
+  // games: Array<any> = [];
+ 
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) {
+    const gameCollection = collection(this.firestore, 'games');
+    this.game$ = collectionData(gameCollection);
+
+    this.game$.subscribe((newGame) => {
+       console.log('neues Spiel', newGame);
+      });
+  }
+  
+
 
   ngOnInit(): void {
     this.newGame();
-  }
+    // this.firestore
+    //   .collection('games')
+    //   .valueChanges()
+    //   .subscribe((game: Array<string>) => {
+    //     console.log('neues game', game);
+    //   });
+    }
+  
 
   newGame() {
     this.game = new Game();
