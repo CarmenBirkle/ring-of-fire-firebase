@@ -12,6 +12,7 @@ import { StartScreenComponent } from './start-screen/start-screen.component';
 import { GameComponent } from './game/game.component';
 import { DialogAddPlayerComponent } from './dialog-add-player/dialog-add-player.component';
 import { GameInfoComponent } from './game-info/game-info.component';
+import { PlayerComponent } from './player/player.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { GameInfoComponent } from './game-info/game-info.component';
     StartScreenComponent,
     GameComponent,
     DialogAddPlayerComponent,
-    GameInfoComponent
+    GameInfoComponent,
+    PlayerComponent
   ],
   imports: [
     BrowserModule,

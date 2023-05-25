@@ -1,0 +1,27 @@
+.player{
+    display:flex;
+    align-items: center;
+    gap: 16px;
+    background-color: #a8a8a8;
+  
+    width: 300px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    justify-content: space-between;
+    span{
+        font-size: 32px;
+        color:#dddcdc;
+        padding-left: 16px;
+    }
+    img{
+        width:70px;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 50%;
+        border:white 2px solid;
+
+    }
+}
+.player-active{
+     background-color: black
+}
