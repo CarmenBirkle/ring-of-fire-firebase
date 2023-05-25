@@ -1,1 +1,7 @@
-<p>game-info works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title> {{ card ? title : 'Please add Payers and pick a Card. Have Fun and Cheers!' }}</mat-card-title>
+  </mat-card-header>
+ <!-- <mat-card-content> {{ card ? description : '1. Click on add to generate a Player <br> 2. Click on the card stack to select the next Card'  }}</mat-card-content> -->
+ <mat-card-content [innerHTML]="card ? description : '1. Click on the plus button to add Players <br> 2. Then click on the card stack to select a new card'"></mat-card-content>
+</mat-card>

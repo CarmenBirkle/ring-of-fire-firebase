@@ -13,6 +13,15 @@ import { GameComponent } from './game/game.component';
 import { DialogAddPlayerComponent } from './dialog-add-player/dialog-add-player.component';
 import { GameInfoComponent } from './game-info/game-info.component';
 import { PlayerComponent } from './player/player.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -21,7 +30,7 @@ import { PlayerComponent } from './player/player.component';
     GameComponent,
     DialogAddPlayerComponent,
     GameInfoComponent,
-    PlayerComponent
+    PlayerComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,9 +38,17 @@ import { PlayerComponent } from './player/player.component';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatInputModule,
+    MatCardModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
