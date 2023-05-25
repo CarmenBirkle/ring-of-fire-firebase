@@ -24,8 +24,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class GameComponent implements OnInit {
   game: Game = new Game();
-  pickCardAnimation = false;
-  currentCard: string = '';
   private firestore: Firestore = inject(Firestore);
   // game$: Observable<any[]>;
   gameID: string = '';
@@ -65,10 +63,9 @@ export class GameComponent implements OnInit {
                 this.game.stack = game['stack'];
                 this.game.playedCards = game['playedCards'];
                 this.game.currentPlayer = game['currentPlayer'];
-                this.currentCard = game['currentCard'];
-                // ggf. currentCard nach game auslagern - ist im github auch so
-                // this.game.pickCardAnimation = game['pickCardAnimation'];
-                // this.game.gameOver = game['gameOver'];
+                this.game.currentCard = game['currentCard'];
+                this.game.pickCardAnimation = game['pickCardAnimation'];
+                this.game.gameOver = game['gameOver'];
             
           })
     });
@@ -81,11 +78,16 @@ export class GameComponent implements OnInit {
   // } else {
 
   takeCard() {
-    if (!this.pickCardAnimation) {
-      this.currentCard = this.game.stack.pop() as string;
+    const card = this.game.stack.pop();
+    console.log('card',card);
+
+    if (!this.game.pickCardAnimation) {
+      // this.currentCard = this.game.stack.pop() as string;
+      this.game.currentCard = card as string;
       // TODO: logs raus
-      console.log(this.currentCard);
-      this.pickCardAnimation = true;
+      console.log(this.game.currentCard);
+      this.game.pickCardAnimation = true;
+      this.saveGame();
 
       // TODO logs raus
       console.log(this.game.playedCards);
@@ -94,8 +96,10 @@ export class GameComponent implements OnInit {
     this.game.currentPlayer =
       this.game.currentPlayer % this.game.players.length;
     setTimeout(() => {
-      this.game.playedCards.push(this.currentCard);
-      this.pickCardAnimation = false;
+      this.game.playedCards.push(this.game.currentCard);
+      
+      this.game.pickCardAnimation = false;
+      this.saveGame();
     }, 1000);
   }
 
