@@ -12,6 +12,7 @@ import {
   doc,
   addDoc,
   docData,
+  updateDoc,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -72,9 +73,6 @@ export class GameComponent implements OnInit {
           })
     });
  
-    //  const gameCollection = collection(this.firestore, 'games');
-    //  let gameInfo = await addDoc(gameCollection, this.game.toJson());
-    //  console.log(gameInfo);
   }
 
   // TODO  ggf. bei take Card abfangen wenn keine Karten mehr da sind:
@@ -105,7 +103,16 @@ export class GameComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
     dialogRef.afterClosed().subscribe((name: string) => {
-      if (name && name.length > 0) this.game.players.push(name);
+      if (name && name.length > 0) {
+        this.game.players.push(name);
+        this.saveGame();
+      }
     });
+  }
+
+  async saveGame(){
+    const gameCollection = collection(this.firestore, 'games');
+    const documentReference = doc(gameCollection, this.gameID);
+    await updateDoc(documentReference, this.game.toJson());
   }
 }
