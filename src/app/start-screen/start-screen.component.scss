@@ -1,0 +1,39 @@
+.start-screen{
+    background-color: #404040;
+    width:100vw;
+    height:100vh;
+    max-width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+
+    }
+
+}
+.start-label{
+    position:relative;
+}
+.start-button{
+    position:absolute;
+    top:372px;
+    right:167px;
+    display: flex;
+    justify-content: center;
+
+    img{
+        width: 139px;
+        cursor: pointer;
+        // top:527px;
+        // right:288px;
+
+        &:hover{
+            filter:brightness(1.25)
+        }
+        &:active {
+//   background-color: #3e8e41;
+//   box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+    }
+}

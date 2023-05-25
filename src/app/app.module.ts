@@ -8,10 +8,18 @@ import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { StartScreenComponent } from './start-screen/start-screen.component';
+import { GameComponent } from './game/game.component';
+import { DialogAddPlayerComponent } from './dialog-add-player/dialog-add-player.component';
+import { GameInfoComponent } from './game-info/game-info.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    StartScreenComponent,
+    GameComponent,
+    DialogAddPlayerComponent,
+    GameInfoComponent
   ],
   imports: [
     BrowserModule,
