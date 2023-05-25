@@ -87,7 +87,7 @@ export class GameComponent implements OnInit {
       // TODO: logs raus
       console.log(this.game.currentCard);
       this.game.pickCardAnimation = true;
-      this.saveGame();
+    
 
       // TODO logs raus
       console.log(this.game.playedCards);
@@ -95,6 +95,7 @@ export class GameComponent implements OnInit {
     this.game.currentPlayer++;
     this.game.currentPlayer =
       this.game.currentPlayer % this.game.players.length;
+        this.saveGame();
     setTimeout(() => {
       this.game.playedCards.push(this.game.currentCard);
       
