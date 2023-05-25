@@ -10,6 +10,7 @@ import {
   collectionData,
   setDoc,
   doc,
+  addDoc,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
@@ -24,7 +25,7 @@ export class GameComponent implements OnInit {
   currentCard: string = '';
   private firestore: Firestore = inject(Firestore);
   game$: Observable<any[]>;
-  // games: Array<any> = [];
+  
  
 
   constructor(public dialog: MatDialog) {
@@ -40,18 +41,15 @@ export class GameComponent implements OnInit {
 
   ngOnInit(): void {
     this.newGame();
-    // this.firestore
-    //   .collection('games')
-    //   .valueChanges()
-    //   .subscribe((game: Array<string>) => {
-    //     console.log('neues game', game);
-    //   });
     }
   
 
-  newGame() {
+  async newGame() {
     this.game = new Game();
     console.log(this.game);
+     const gameCollection = collection(this.firestore, 'games');
+     let gameInfo = await addDoc(gameCollection, this.game.toJson());
+     console.log(gameInfo);
   }
 
   // TODO  ggf. bei take Card abfangen wenn keine Karten mehr da sind:
