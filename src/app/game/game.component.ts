@@ -15,6 +15,7 @@ import {
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { EditPlayerComponent } from '../edit-player/edit-player.component';
 
 
 @Component({
@@ -105,5 +106,10 @@ export class GameComponent implements OnInit {
 
   editPlayer(playerId: number){
     console.log("edit player", playerId);
+         const dialogRef = this.dialog.open(EditPlayerComponent);
+     dialogRef.afterClosed().subscribe((change: string) => {
+       console.log("recieved change", change);
+       }
+      );
   }
 }
