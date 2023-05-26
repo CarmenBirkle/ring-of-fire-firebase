@@ -1,5 +1,3 @@
-
-//@ts-check
 import { Component, OnInit , inject} from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
@@ -16,6 +14,8 @@ import {
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-game',
@@ -25,88 +25,70 @@ import { ActivatedRoute } from '@angular/router';
 export class GameComponent implements OnInit {
   game: Game = new Game();
   private firestore: Firestore = inject(Firestore);
-  // game$: Observable<any[]>;
   gameID: string = '';
-  
- 
 
-  constructor(private route: ActivatedRoute, public dialog: MatDialog) {
-    // const gameCollection = collection(this.firestore, 'games');
-    // this.game$ = collectionData(gameCollection);
-
-    // this.game$.subscribe((newGame) => {
-    //    console.log('neues Spiel', newGame);
-    //   });
-  }
-  
-
+  // constructor(private route: ActivatedRoute, public dialog: MatDialog) {}
+  constructor(
+    private route: ActivatedRoute,
+    public dialog: MatDialog,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.newGame();
-    // this.route.params.subscribe((params) => {
-    //  console.log(params['id'])
-    // });
   }
-  
 
   async newGame() {
     this.game = new Game();
     console.log('game from cache', this.game);
     this.route.params.subscribe((params) => {
       this.gameID = params['id'];
-          const gameCollection = collection(this.firestore, 'games');
-          const documentReference = doc(gameCollection, params['id']);
-          docData(documentReference).subscribe((game) => {
-            console.log('game from db', game);
-                // this.game.player_images = game['player_images'];
-                this.game.players = game['players'];
-                this.game.stack = game['stack'];
-                this.game.playedCards = game['playedCards'];
-                this.game.currentPlayer = game['currentPlayer'];
-                this.game.currentCard = game['currentCard'];
-                this.game.pickCardAnimation = game['pickCardAnimation'];
-                this.game.gameOver = game['gameOver'];
-            
-          })
+      const gameCollection = collection(this.firestore, 'games');
+      const documentReference = doc(gameCollection, params['id']);
+      docData(documentReference).subscribe((game) => {
+        console.log('game from db', game);
+        this.game.players = game['players'];
+        this.game.stack = game['stack'];
+        this.game.playedCards = game['playedCards'];
+        this.game.currentPlayer = game['currentPlayer'];
+        this.game.currentCard = game['currentCard'];
+        this.game.pickCardAnimation = game['pickCardAnimation'];
+        this.game.gameOver = game['gameOver'];
+      });
     });
- 
   }
 
-  // TODO  ggf. bei take Card abfangen wenn keine Karten mehr da sind:
-  //   if(this.game.stack.length > 0){
-  //   this.currentCard = this.game.stack.pop() as string;
-  // } else {
+  async restartGame() {
+    //start a new game
+    this.game = new Game(); // start a new game
+    const gameCollection = collection(this.firestore, 'games'); /// hole die collection in Firestore an der Stelle "todos
+    let gameInfo = await addDoc(gameCollection, this.game.toJson()); // setze einen neuen Wert (neues ID dokument (URL))
+    console.log(gameInfo);
+    this.router.navigateByUrl('game/' + gameInfo.id); // navigiere zu dem angegebenen Pfad (game/id)
+  }
 
   takeCard() {
     const card = this.game.stack.pop();
-    console.log('card',card);
-
-    if (!this.game.pickCardAnimation) {
-      // this.currentCard = this.game.stack.pop() as string;
-      this.game.currentCard = card as string;
-      // TODO: logs raus
-      console.log(this.game.currentCard);
-      this.game.pickCardAnimation = true;
-    
-
-      // TODO logs raus
-      console.log(this.game.playedCards);
-    }
-    this.game.currentPlayer++;
-    this.game.currentPlayer =
-      this.game.currentPlayer % this.game.players.length;
-        this.saveGame();
-    setTimeout(() => {
-      this.game.playedCards.push(this.game.currentCard);
-      
-      this.game.pickCardAnimation = false;
+    if (this.game.stack.length === 0) {
+      this.game.gameOver = true;
       this.saveGame();
-    }, 1000);
+    } else if (!this.game.pickCardAnimation && card) {
+      this.game.currentCard = card as string;
+      this.game.pickCardAnimation = true;
+      this.game.currentPlayer++;
+      this.game.currentPlayer =
+        this.game.currentPlayer % this.game.players.length;
+      this.saveGame();
+      setTimeout(() => {
+        this.game.playedCards.push(this.game.currentCard);
+        this.game.pickCardAnimation = false;
+        this.saveGame();
+      }, 1000);
+    }
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
-
     dialogRef.afterClosed().subscribe((name: string) => {
       if (name && name.length > 0) {
         this.game.players.push(name);
@@ -115,7 +97,7 @@ export class GameComponent implements OnInit {
     });
   }
 
-  async saveGame(){
+  async saveGame() {
     const gameCollection = collection(this.firestore, 'games');
     const documentReference = doc(gameCollection, this.gameID);
     await updateDoc(documentReference, this.game.toJson());

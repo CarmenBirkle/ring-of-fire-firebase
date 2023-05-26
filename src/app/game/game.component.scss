@@ -72,3 +72,13 @@
     left: 100px;
     right: 100px;
 }
+
+.game-over{
+    background-color: #d2cbc5;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    background-image: url('./../../assets/img/game-over.jpg');
+     background-repeat: no-repeat;
+    background-size: cover;
+}
