@@ -137,9 +137,11 @@
     overflow-y: auto;
     overflow-x: hidden;
     width:300px;
+}
 
-    // app-player {
-    //     margin-left: 83px;
-    //     margin-bottom: 110px;
-    // }
+app-player, app-player-mobile{
+ cursor: pointer;
+ &:hover{
+     filter:brightness(1.15);
+ }
 }

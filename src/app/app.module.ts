@@ -23,6 +23,7 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { PlayerMobileComponent } from './player-mobile/player-mobile.component';
+import { AditPlayerComponent } from './adit-player/adit-player.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { PlayerMobileComponent } from './player-mobile/player-mobile.component';
     GameInfoComponent,
     PlayerComponent,
     PlayerMobileComponent,
+    AditPlayerComponent,
   ],
   imports: [
     BrowserModule,

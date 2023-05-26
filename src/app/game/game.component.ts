@@ -77,7 +77,7 @@ export class GameComponent implements OnInit {
       this.game.pickCardAnimation = true;
       this.game.currentPlayer++;
       this.game.currentPlayer =
-        this.game.currentPlayer % this.game.players.length;
+      this.game.currentPlayer % this.game.players.length;
       this.saveGame();
       setTimeout(() => {
         this.game.playedCards.push(this.game.currentCard);
@@ -101,5 +101,9 @@ export class GameComponent implements OnInit {
     const gameCollection = collection(this.firestore, 'games');
     const documentReference = doc(gameCollection, this.gameID);
     await updateDoc(documentReference, this.game.toJson());
+  }
+
+  editPlayer(playerId: number){
+    console.log("edit player", playerId);
   }
 }
