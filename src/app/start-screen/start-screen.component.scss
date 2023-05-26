@@ -1,5 +1,7 @@
 .start-screen{
-    background-color: #404040;
+    // background-color: #404040;
+  background: rgb(195,108,34);
+  background: linear-gradient(326deg, rgba(195,108,34,1) 0%, rgba(253,187,45,0.6152836134453781) 100%);
     width:100vw;
     height:100vh;
     max-width:100%;
@@ -9,8 +11,25 @@
     img {
 
     }
-
+    @media screen and (max-width: 960px) {
+        img {
+            width: 550px;
+        }
+    }
+      @media screen and (max-width: 560px) {
+        img {
+            width: 350px;
+        }
+    }
+      @media screen and (max-width: 350px) {
+        img {
+            width: 300px;
+        }
+    }
+        
 }
+
+
 .start-label{
     position:relative;
 }
@@ -24,16 +43,35 @@
     img{
         width: 139px;
         cursor: pointer;
-        // top:527px;
-        // right:288px;
-
         &:hover{
             filter:brightness(1.25)
         }
         &:active {
-//   background-color: #3e8e41;
-//   box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
+          transform: translateY(4px);
+        }
+    }
+
+    @media screen and (max-width: 960px) {
+        top: 225px;
+        right:93px;
+        img {
+            width: 94px;
+        }
+          
+        
+    }
+      @media screen and (max-width: 560px) {
+        top:140px;
+        right: 44px;
+        img {
+            width: 73px;
+        }
+    }
+      @media screen and (max-width: 350px) {
+        top:116px;
+        right:48px;
+        img {
+            width: 55px;
+        }
     }
 }

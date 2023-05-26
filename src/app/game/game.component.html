@@ -8,16 +8,23 @@
                 class="player-position" 
         >
         </app-player>
-        <div class="scroll ">
+        <!-- <div class="scroll mobile ">
+               <app-player-mobile 
+                        (click)="editPlayer(i)" 
+                        *ngFor=" let player of game.players; let i = index;"
+                        [playerActive]="i == game.currentPlayer" 
+                        [name]="player">
+                </app-player-mobile>
+        </div> -->
 
-        </div>
+ </div>
 
-</div>
+
 
 
 <div *ngIf="game.gameOver" class="gameOver">
     <img src="assets/img/game-over1.png">
-     <button (click)="restartGame()">Again ?</button>
+     <button (click)="restartGame()">Still not enough ? Resume</button>
     
 </div>
 
