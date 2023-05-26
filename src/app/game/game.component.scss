@@ -4,12 +4,12 @@
     max-width: 100%;
     background-image: url('./../../assets/img/board.png');
     background-repeat: no-repeat;
+    background-position: center;
     background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
-
-  
+    overflow:hidden;  
 }
 
 .card-stack{
@@ -24,7 +24,7 @@
     cursor:pointer;
     transition: all 125ms ease-in-out;
         &:hover{
-            transform: scale(1.1) translateY(-10px);
+            transform: scale(1.1) translateY(-10px) ;
 
         }
 }
@@ -52,33 +52,94 @@
 .played-card{
     right:25px;
     transform: scale(1.3) translateX(140px) translateY(-180px) rotate(-10deg);
+
+    @media(max-width:384px){
+        right: 45px;
+    }
 }
 .player-position{
     position: absolute;
     left: 0;
 }
-// .player-scroll{
-//     overflow: scroll;
-// }
+
 .btn-add{
     position: absolute;
     right:32px;
     bottom: 32px;
+    
+    background-color: #9b9b9b !important;
+
+    @media(max-width:720px){
+       z-index: 99;
+       bottom: 10px;
+    } 
 }
+
 
 .pin-bottom{
     position: absolute;
     bottom: 32px;
     left: 100px;
     right: 100px;
+    @media(max-width:720px){
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+    }
 }
 
+
+// .game-over{
+//     background-color: #d2cbc5;
+//     width: 100vw;
+//     height: 100vh;
+//     max-width: 100%;
+//     background-image: url('./../../assets/img/game-over.jpg');
+//      background-repeat: no-repeat;
+//     background-size: cover;
+// }
+
 .game-over{
-    background-color: #d2cbc5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100vw;
     height: 100vh;
-    max-width: 100%;
-    background-image: url('./../../assets/img/game-over.jpg');
-     background-repeat: no-repeat;
-    background-size: cover;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.scroll-container-mobile {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    app-player-mobile {
+        margin-left: 83px;
+         margin-bottom: 110px;
+    }
+}
+
+.scroll-container-desktop{
+    position: absolute;
+    top: 20px;
+    left: 0;
+    height:715px;
+    display: flex;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width:300px;
+
+    // app-player {
+    //     margin-left: 83px;
+    //     margin-bottom: 110px;
+    // }
 }

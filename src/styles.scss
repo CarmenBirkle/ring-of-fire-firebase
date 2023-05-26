@@ -5,3 +5,14 @@ body{
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 //TODO: Schriftart einbauen - nicht verlinken
+
+@media(min-width:720px){
+    .hide-desktop{
+        display: none;
+    }
+}
+@media(max-width:720px){
+    .hide-mobile{
+        display: none;
+    }
+}

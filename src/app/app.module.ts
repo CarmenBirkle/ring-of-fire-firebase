@@ -22,6 +22,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { PlayerMobileComponent } from './player-mobile/player-mobile.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { MatCardModule } from '@angular/material/card';
     DialogAddPlayerComponent,
     GameInfoComponent,
     PlayerComponent,
+    PlayerMobileComponent,
   ],
   imports: [
     BrowserModule,
