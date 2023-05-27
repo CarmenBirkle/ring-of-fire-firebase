@@ -9,6 +9,7 @@ import { Game } from 'src/models/game';
 })
 export class StartScreenComponent {
   game!: Game;
+  stars = new Array(100);
   constructor(private router: Router, private firestore: Firestore) {}
   
   ngOnInit(): void {}

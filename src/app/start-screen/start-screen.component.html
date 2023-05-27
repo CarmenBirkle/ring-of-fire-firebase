@@ -4,5 +4,11 @@
         <div class="start-button">
             <img (click)="newGame()" src="assets/img/button.png" alt="Start Game">
         </div>
+
+        <div class="circle-container" *ngFor="let item of stars">
+            <div class="circle"></div>
+        </div>
+
+
     </div>
 </div>
