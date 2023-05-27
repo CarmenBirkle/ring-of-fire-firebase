@@ -10,14 +10,22 @@
     justify-content: center;
     align-items: center;
     overflow:hidden;  
+    overflow-y: hidden;
 }
 
 .card-stack{
     position: relative;
     img{
         position:absolute;
-        width: 120px;;
+        width: 120px;
+        z-index:1;
     }
+        @media screen and (device-width: 375px) and (device-height: 667px)  {
+        width:108px;
+    }
+    @media screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) {
+   width:108px;
+}
 }
 
 .top-card{
@@ -56,6 +64,13 @@
     @media(max-width:384px){
         right: 45px;
     }
+
+       @media(max-width:330px){
+        right: 65px;
+    }
+    @media screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) {
+        transform: scale(1.3) translateX(140px) translateY(-147px) rotate(-10deg);
+    }
 }
 .player-position{
     position: absolute;
@@ -66,7 +81,7 @@
     position: absolute;
     right:32px;
     bottom: 32px;
-    
+    z-index: 99;
     background-color: #9b9b9b !important;
 
     @media(max-width:720px){
@@ -89,27 +104,39 @@
 }
 
 
-// .game-over{
-//     background-color: #d2cbc5;
-//     width: 100vw;
-//     height: 100vh;
-//     max-width: 100%;
-//     background-image: url('./../../assets/img/game-over.jpg');
-//      background-repeat: no-repeat;
-//     background-size: cover;
-// }
-
 .game-over{
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100vw;
     height: 100vh;
+    background: rgb(120,128,125);
+    background: linear-gradient(24deg, rgba(120,128,125,1) 0%, rgba(154,100,86,1) 100%);
+}
 
-    img {
+.container{
+    position: relative;
+     width: 100%;
+    height: auto;
+
+      button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 226px;
+        background-color: #9B9588;
+        opacity: 80%;
+
+        @media(max-width:700px){
+            top: 65%;
+         }
+    }
+
+       img {
+        max-width: 1000px;
         width: 100%;
-        height: 100%;
-        object-fit: cover;
+        height: auto;
     }
 }
 
@@ -132,11 +159,14 @@
     position: absolute;
     top: 20px;
     left: 0;
-    height:715px;
+    height:635px;
     display: flex;
     overflow-y: auto;
     overflow-x: hidden;
     width:230px;
+       @media(max-width:700px){
+            height: 600px;
+         }
 }
 
 app-player, app-player-mobile{
@@ -144,4 +174,8 @@ app-player, app-player-mobile{
  &:hover{
      filter:brightness(1.15);
  }
+}
+
+app-game-info{
+    z-index:2;
 }
