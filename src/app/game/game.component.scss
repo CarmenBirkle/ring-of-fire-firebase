@@ -148,10 +148,11 @@
     display: flex;
     overflow-x: auto;
     overflow-y: hidden;
+    gap:64px;
 
     app-player-mobile {
-        margin-left: 83px;
-         margin-bottom: 110px;
+        margin-left: 20px;
+        margin-bottom: 110px;
     }
 }
 

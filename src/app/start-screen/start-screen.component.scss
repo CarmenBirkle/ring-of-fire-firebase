@@ -1,5 +1,4 @@
 .start-screen{
-    // background-color: #404040;
   background: rgb(195,108,34);
   background: linear-gradient(326deg, rgba(195,108,34,1) 0%, rgba(253,187,45,0.6152836134453781) 100%);
     width:100vw;
@@ -9,10 +8,7 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    img {
-
-    }
-    @media screen and (max-width: 960px) {
+     @media screen and (max-width: 960px) {
         img {
             width: 550px;
         }
@@ -28,6 +24,21 @@
         }
     }
         
+}
+
+.info-container{
+  position:absolute;
+  top: 10px;
+  right:10px;
+  display: flex;
+  gap:10px;
+}
+
+.btn-info{
+  height: 40px;
+  width: 40px;
+  background-color: #9A4113;
+  opacity: 90%;
 }
 
 

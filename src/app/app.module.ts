@@ -24,6 +24,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { PlayerMobileComponent } from './player-mobile/player-mobile.component';
 import { EditPlayerComponent } from './edit-player/edit-player.component';
+import { InformationComponent } from './information/information.component';
+import { ImprintComponent } from './imprint/imprint.component';
 
 
 @NgModule({
@@ -36,6 +38,8 @@ import { EditPlayerComponent } from './edit-player/edit-player.component';
     PlayerComponent,
     PlayerMobileComponent,
     EditPlayerComponent,
+    InformationComponent,
+    ImprintComponent,
     
   ],
   imports: [

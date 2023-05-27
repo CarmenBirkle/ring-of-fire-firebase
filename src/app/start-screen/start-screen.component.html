@@ -1,14 +1,21 @@
 <div class="start-screen">
+    <div class="info-container">
+        <button class="btn-info" (click)="openInfo()" mat-fab color="primary" >
+            <mat-icon>info</mat-icon>
+            </button>
+           <button class="btn-info" (click)="openImprint()" mat-fab color="primary" >
+            <mat-icon>policy</mat-icon>
+            </button>
+    </div>
+
     <div class="start-label">
         <img src="assets/img/label.png" >
         <div class="start-button">
             <img (click)="newGame()" src="assets/img/button.png" alt="Start Game">
         </div>
-
-        <div class="circle-container" *ngFor="let item of stars">
+      
+    </div>
+            <div class="circle-container" *ngFor="let item of stars">
             <div class="circle"></div>
         </div>
-
-
-    </div>
 </div>
