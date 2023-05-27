@@ -71,7 +71,9 @@ export class GameComponent implements OnInit {
 
   takeCard() {
     const card = this.game.stack.pop();
-    if (this.game.stack.length === 0) {
+    if (this.game.players.length < 2) {
+      this.openDialog();
+    } else if (this.game.stack.length === 0) {
       this.game.gameOver = true;
       this.saveGame();
     } else if (!this.game.pickCardAnimation && card) {
