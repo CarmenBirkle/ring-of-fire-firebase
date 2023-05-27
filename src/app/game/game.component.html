@@ -7,6 +7,7 @@
                         [ngStyle]="{'top.px': 20 + (i*90)}"
                         [playerActive]="i == game.currentPlayer"
                         [name]="player"
+                        [playerImage]="game.player_images[i]"
                         class="player-position hide-mobile" 
                 >
                 </app-player>
@@ -18,6 +19,7 @@
                         *ngFor=" let player of game.players; let i = index;"
                         [playerActive]="i == game.currentPlayer" 
                         [name]="player"
+                        [playerImage]="game.player_images[i]"
                         class="hide-desktop"
                         >
                 </app-player-mobile>

@@ -4,16 +4,19 @@
     gap: 16px;
     background-color: #a8a8a8;
   
-    width: 300px;
+    width: 210px;
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
     justify-content: space-between;
     position:absolute;
     z-index:1;
     span{
-        font-size: 32px;
+        font-size: 22px;
         color:#dddcdc;
         padding-left: 16px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
     }
     img{
         width:70px;

@@ -52,6 +52,7 @@ export class GameComponent implements OnInit {
         this.game.stack = game['stack'];
         this.game.playedCards = game['playedCards'];
         this.game.currentPlayer = game['currentPlayer'];
+        this.game.player_images = game['player_images'];
         this.game.currentCard = game['currentCard'];
         this.game.pickCardAnimation = game['pickCardAnimation'];
         this.game.gameOver = game['gameOver'];
@@ -78,7 +79,7 @@ export class GameComponent implements OnInit {
       this.game.pickCardAnimation = true;
       this.game.currentPlayer++;
       this.game.currentPlayer =
-      this.game.currentPlayer % this.game.players.length;
+        this.game.currentPlayer % this.game.players.length;
       this.saveGame();
       setTimeout(() => {
         this.game.playedCards.push(this.game.currentCard);
@@ -93,6 +94,7 @@ export class GameComponent implements OnInit {
     dialogRef.afterClosed().subscribe((name: string) => {
       if (name && name.length > 0) {
         this.game.players.push(name);
+        this.game.player_images.push('profile1.png');
         this.saveGame();
       }
     });
@@ -104,12 +106,19 @@ export class GameComponent implements OnInit {
     await updateDoc(documentReference, this.game.toJson());
   }
 
-  editPlayer(playerId: number){
-    console.log("edit player", playerId);
-         const dialogRef = this.dialog.open(EditPlayerComponent);
-     dialogRef.afterClosed().subscribe((change: string) => {
-       console.log("recieved change", change);
-       }
-      );
+  editPlayer(playerId: number) {
+    const dialogRef = this.dialog.open(EditPlayerComponent);
+    dialogRef.afterClosed().subscribe((change: string) => {
+      if (change) {
+        if (change == 'DELETE') {
+          this.game.players.splice(playerId, 1);
+          this.game.player_images.splice(playerId, 1);
+          this.saveGame();
+        } else {
+          this.game.player_images[playerId] = change;
+          this.saveGame();
+        }
+      }
+    });
   }
 }
