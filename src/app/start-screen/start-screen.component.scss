@@ -88,25 +88,6 @@
     }
 }
 
-
-// .background {
-//   display: block;
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   object-fit: cover;
-//   width: 100%;
-//   height: 100%;
-
-//   mask-image: radial-gradient(
-//     white 0%,
-//     white 30%,
-//     transparent 80%,
-//     transparent
-//   );
-// }
-
-
 .circle-container {
   $particleNum: 200;
   $particleColor: hsl(180, 100%, 80%);

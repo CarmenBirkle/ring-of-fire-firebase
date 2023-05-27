@@ -25,11 +25,11 @@ export class StartScreenComponent {
   ngOnInit(): void {}
 
   async newGame() {
-    this.game = new Game(); // start a new game
-    const gameCollection = collection(this.firestore, 'games'); /// hole die collection in Firestore an der Stelle "todos
-    let gameInfo = await addDoc(gameCollection, this.game.toJson()); // setze einen neuen Wert (neues ID dokument (URL))
+    this.game = new Game(); 
+    const gameCollection = collection(this.firestore, 'games'); 
+    let gameInfo = await addDoc(gameCollection, this.game.toJson()); 
     console.log(gameInfo);
-    this.router.navigateByUrl('game/' + gameInfo.id); // navigiere zu dem angegebenen Pfad (game/id)
+    this.router.navigateByUrl('game/' + gameInfo.id); 
   }
 
   openInfo(): void {

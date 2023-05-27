@@ -5,14 +5,11 @@ import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player
 import {
   Firestore,
   collection,
-  collectionData,
-  setDoc,
   doc,
   addDoc,
   docData,
   updateDoc,
 } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { EditPlayerComponent } from '../edit-player/edit-player.component';
@@ -28,7 +25,6 @@ export class GameComponent implements OnInit {
   private firestore: Firestore = inject(Firestore);
   gameID: string = '';
 
-  // constructor(private route: ActivatedRoute, public dialog: MatDialog) {}
   constructor(
     private route: ActivatedRoute,
     public dialog: MatDialog,
@@ -61,12 +57,11 @@ export class GameComponent implements OnInit {
   }
 
   async restartGame() {
-    //start a new game
-    this.game = new Game(); // start a new game
-    const gameCollection = collection(this.firestore, 'games'); /// hole die collection in Firestore an der Stelle "todos
-    let gameInfo = await addDoc(gameCollection, this.game.toJson()); // setze einen neuen Wert (neues ID dokument (URL))
+    this.game = new Game(); 
+    const gameCollection = collection(this.firestore, 'games'); 
+    let gameInfo = await addDoc(gameCollection, this.game.toJson()); 
     console.log(gameInfo);
-    this.router.navigateByUrl('game/' + gameInfo.id); // navigiere zu dem angegebenen Pfad (game/id)
+    this.router.navigateByUrl('game/' + gameInfo.id); 
   }
 
   takeCard() {
@@ -81,7 +76,7 @@ export class GameComponent implements OnInit {
       this.game.pickCardAnimation = true;
       this.game.currentPlayer++;
       this.game.currentPlayer =
-        this.game.currentPlayer % this.game.players.length;
+      this.game.currentPlayer % this.game.players.length;
       this.saveGame();
       setTimeout(() => {
         this.game.playedCards.push(this.game.currentCard);

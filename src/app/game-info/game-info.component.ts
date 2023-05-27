@@ -9,6 +9,7 @@ export class GameInfoComponent implements OnInit, OnChanges {
   title: string = '';
   description: string = '';
   @Input() card!: string;
+
   cardAction = [
     {
       title: 'Waterfall',
@@ -37,9 +38,15 @@ export class GameInfoComponent implements OnInit, OnChanges {
       description:
         'Pick a mate. Your mate must always drink when you drink and the other way around.',
     },
-    { title: 'Thumbmaster', description: '' },
+    {
+      title: 'Thumbmaster',
+      description: 'Start screaming, the first to stop has to drink',
+    },
     { title: 'Men', description: 'All men drink.' },
-    { title: 'Quizmaster', description: '' },
+    {
+      title: 'Quizmaster',
+      description: 'Start laughing, the first to stop has to drink',
+    },
     {
       title: 'Never have i ever...',
       description:
