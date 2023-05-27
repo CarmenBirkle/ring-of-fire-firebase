@@ -37,13 +37,11 @@ export class GameComponent implements OnInit {
 
   async newGame() {
     this.game = new Game();
-    console.log('game from cache', this.game);
     this.route.params.subscribe((params) => {
       this.gameID = params['id'];
       const gameCollection = collection(this.firestore, 'games');
       const documentReference = doc(gameCollection, params['id']);
       docData(documentReference).subscribe((game) => {
-        console.log('game from db', game);
         this.game.players = game['players'];
         this.game.stack = game['stack'];
         this.game.playedCards = game['playedCards'];
@@ -60,7 +58,6 @@ export class GameComponent implements OnInit {
     this.game = new Game(); 
     const gameCollection = collection(this.firestore, 'games'); 
     let gameInfo = await addDoc(gameCollection, this.game.toJson()); 
-    console.log(gameInfo);
     this.router.navigateByUrl('game/' + gameInfo.id); 
   }
 

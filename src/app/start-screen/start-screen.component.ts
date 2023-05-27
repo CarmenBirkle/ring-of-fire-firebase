@@ -28,7 +28,6 @@ export class StartScreenComponent {
     this.game = new Game(); 
     const gameCollection = collection(this.firestore, 'games'); 
     let gameInfo = await addDoc(gameCollection, this.game.toJson()); 
-    console.log(gameInfo);
     this.router.navigateByUrl('game/' + gameInfo.id); 
   }
 
